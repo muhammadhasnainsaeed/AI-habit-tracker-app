@@ -21,12 +21,12 @@ export default function Index() {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [pickedEmoji, setPickedEmoji] = useState<ImageSourcePropType | undefined>(undefined);
   const imageRef = useRef<View>(null);
-  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions({ writeOnly: true });
+  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions({ writeOnly: true, });
   useEffect(() => {
     if (!permissionResponse?.granted) {
       requestPermission();
     }
-  }, []);
+  });
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
