@@ -27,10 +27,12 @@
     },
     "plugins": [
       "expo-router",
-       [
+      [
         "expo-media-library",
         {
-          "granularPermissions": ["photo"]
+          "granularPermissions": [
+            "photo"
+          ]
         }
       ],
       [
@@ -44,7 +46,8 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
