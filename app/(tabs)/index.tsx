@@ -15,35 +15,16 @@ import { captureRef } from 'react-native-view-shot';
 const PlaceholderImage = require('@/assets/images/hasnain.jpg');
 
 export default function Index() {
-  const [permissionResponse, setPermissionResponse] = useState<MediaLibrary.PermissionResponse | null>(null);
   const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const [showAppOptions, setShowAppOptions] = useState<boolean>(false);
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
   const [pickedEmoji, setPickedEmoji] = useState<ImageSourcePropType | undefined>(undefined);
   const imageRef = useRef<View>(null);
-
-  const requestPermission = async () => {
-    try {
-      const res = await MediaLibrary.requestPermissionsAsync(false, ['photo']);
-      setPermissionResponse(res);
-    } catch (e) {
-      console.log("Error requesting permissions:", e);
-    }
-  };
-
+  const [permissionResponse, requestPermission] = MediaLibrary.usePermissions({ writeOnly: true });
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await MediaLibrary.getPermissionsAsync(false, ['photo']);
-        setPermissionResponse(res);
-        if (!res.granted) {
-          requestPermission();
-        }
-      } catch (e) {
-        console.log("Error getting permissions:", e);
-        requestPermission();
-      }
-    })();
+    if (!permissionResponse?.granted) {
+      requestPermission();
+    }
   }, []);
 
   const pickImageAsync = async () => {

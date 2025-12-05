@@ -27,6 +27,12 @@
     },
     "plugins": [
       "expo-router",
+       [
+        "expo-media-library",
+        {
+          "granularPermissions": ["photo"]
+        }
+      ],
       [
         "expo-splash-screen",
         {
