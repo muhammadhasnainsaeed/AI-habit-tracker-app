@@ -26,7 +26,7 @@ export default function Index() {
     if (!permissionResponse?.granted) {
       requestPermission();
     }
-  });
+  }, []);
 
   const pickImageAsync = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
